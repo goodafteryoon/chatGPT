@@ -2,11 +2,13 @@ const API_KEY = config.apikey;
 
 function genDescription(description) {
   const data = {
-    model: 'text-davinci-003',
-    suffix: description,
-    prompt: `Please use the word in "${description}" to write a more detailed animation-like description Please use the word in input to write a more detailed animation-like description
-        in one line of English`,
-    n: 4,
+    model: 'gpt-3.5-turbo',
+    messages: [
+      {
+        role: 'assistant',
+        content: `Please 5 list of items use the keywords in ${description} to write a more detailed animation-like description in short one line of English without title`,
+      },
+    ],
   };
   return fetch('https://api.openai.com/v1/completions', {
     method: 'POST',
